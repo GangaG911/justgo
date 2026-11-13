@@ -1,5 +1,6 @@
 const API_BASE_URL =
-    import.meta.env.VITE_API_URL || "http://localhost:5000";
+    import.meta.env.VITE_API_URL ||
+    "https://justgo-backend-4q8q.onrender.com";
 
 export async function apiRequest(
     path, { method = "GET", body, token } = {}
@@ -14,23 +15,18 @@ export async function apiRequest(
         headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(
-        `${API_BASE_URL}${path}`, {
-            method,
-            headers,
-            body: body === undefined ?
-                undefined : JSON.stringify(body)
-        }
-    );
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+        method,
+        headers,
+        body: body === undefined ? undefined : JSON.stringify(body),
+    });
 
     const data = await response.json().catch(() => ({
-        message: "Invalid server response"
+        message: "Invalid server response",
     }));
 
     if (!response.ok) {
-        throw new Error(
-            data.message || `Request failed: ${response.status}`
-        );
+        throw new Error(data.message || `Request failed: ${response.status}`);
     }
 
     return data;
