@@ -5,7 +5,7 @@ import {
   Camera, Image as ImageIcon
 } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api/wardrobe";
+const API_URL = "https://justgo-backend-4q8q.onrender.com/api/wardrobe";
 
 function Wardrobe() {
   const [items, setItems] = useState([]);
